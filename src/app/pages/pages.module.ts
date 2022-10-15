@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {FormsModule} from '@angular/forms'
 import {RouterOutlet} from '@angular/router'
+
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
@@ -9,6 +11,7 @@ import { PagesComponent } from './pages.component';
 import { ShareModule } from '../share/share.module';
 import { PagesRoutingModule } from './pages-routing.module';
 // import { AppRoutingModule } from '../app-routing.module';
+import { ComponentsModule } from '../components/components.module';
 
 
 
@@ -25,7 +28,10 @@ import { PagesRoutingModule } from './pages-routing.module';
     CommonModule,
     ShareModule,
     PagesRoutingModule,
-    RouterOutlet
+    RouterOutlet, 
+    FormsModule,
+  
+    ComponentsModule
 
 
   ],

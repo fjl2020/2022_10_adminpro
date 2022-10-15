@@ -1,1 +1,60 @@
-<p>progress works!</p>
+<div class="row">
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Striped Progress bar</h4>
+        <div class="progress m-t-20">
+          <div
+            class="progress-bar bg-primary  progress-bar-striped active"
+            aria-valuenow="85"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            style=" height:  5px"
+            [style.width]="getPorcentaje1"
+            role="progressbar"
+          >
+            <span class="sr-only">{{getPorcentaje1}}% Complete (success)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Striped Progress bar</h4>
+        <div class="progress m-t-20">
+          <div
+            class="progress-bar bg-info  progress-bar-striped active"
+            aria-valuenow="85"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            style=" height:  5px"
+            [style.width]="getPorcentaje2"
+            role="progressbar"
+          >
+            <span class="sr-only">{{getPorcentaje2}}% Complete (success)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+            <app-incrementador (valOut)="progreso1=$event"  [valor]="progreso1"></app-incrementador>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+        <app-incrementador   (valOut)="progreso2=$event"  [valor]="progreso2" [btnClass]="'btn-info'"></app-incrementador>
+        <!-- <app-incrementador   (valOut)="progreso2=$event"  [valor]="progreso2" btnClass="btn btn-info"></app-incrementador> -->
+       </div>
+    </div>
+  </div>
+</div>
