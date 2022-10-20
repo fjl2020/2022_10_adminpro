@@ -12,6 +12,7 @@ import { ShareModule } from '../share/share.module';
 import { PagesRoutingModule } from './pages-routing.module';
 // import { AppRoutingModule } from '../app-routing.module';
 import { ComponentsModule } from '../components/components.module';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 
 
@@ -21,6 +22,7 @@ import { ComponentsModule } from '../components/components.module';
     ProgressComponent,
     Grafica1Component,
     PagesComponent,
+    AccountSettingsComponent,
 
     
   ],
@@ -40,6 +42,7 @@ import { ComponentsModule } from '../components/components.module';
     ProgressComponent,
     Grafica1Component,
     PagesComponent,
+    AccountSettingsComponent,
   ]
 })
 export class PagesModule { }
