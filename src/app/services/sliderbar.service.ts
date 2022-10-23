@@ -11,14 +11,8 @@ export class SliderbarService {
         {title:'Main',url:'/'},
         {title:'ProgressBar',url:"progress"},
         {title:'Graficas',url:"grafica1"},
-
-    ]},
-    {title:'Dashboard2',
-      icon: 'mdi mdi-gauge',
-      submenu:[
-        {title:'Main',url:'/'},
-        {title:'ProgressBar',url:"progress"},
-        {title:'Graficas',url:"grafica1"},
+        {title:'Promesas',url:"promesas"},
+        {title:'RXJS',url:"rxjs"},
 
     ]}
     
