@@ -5,6 +5,14 @@
   animation-fill-mode: both;
 }
 
-#themecolors .selector{
+#themecolors .selector,.cursor{
   cursor: pointer;
+}
+
+#buttonDiv{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+
 }
