@@ -9,13 +9,13 @@
             class="has-arrow waves-effect waves-dark"
             href="#"
             aria-expanded="false"
-            ><img src="../assets/images/users/profile.png" alt="user" /><span
+            ><img [src]="usuario?.imagenURL" alt="user" /><span
               class="hide-menu"
-              >Steave Jobs
+              >{{usuario?.nombre}}
             </span></a
           >
           <ul aria-expanded="false" class="collapse">
-            <li><a href="javascript:void()">My Profile </a></li>
+            <li ><a routerLinkActive="active" routerLink="perfil">My Profile </a></li>
             <li><a href="javascript:void()">My Balance</a></li>
             <li><a href="javascript:void()">Inbox</a></li>
             <li><a routerLink="account-settings">Account Setting</a></li>
