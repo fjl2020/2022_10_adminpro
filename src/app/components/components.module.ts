@@ -4,11 +4,16 @@ import { IncrementadorComponent } from './incrementador/incrementador.component'
 import { FormsModule } from '@angular/forms';
 import { DoughnutComponent } from './doughnut/doughnut.component';
 import { NgChartsModule } from 'ng2-charts';
+import { ModelImagenComponent } from './model-imagen/model-imagen.component';
 
 @NgModule({
-  declarations: [IncrementadorComponent, DoughnutComponent],
+  declarations: [
+    IncrementadorComponent,
+    DoughnutComponent,
+    ModelImagenComponent,
+  ],
 
-  imports: [CommonModule,FormsModule,  NgChartsModule],
-  exports: [IncrementadorComponent,DoughnutComponent],
+  imports: [CommonModule, FormsModule, NgChartsModule],
+  exports: [IncrementadorComponent, DoughnutComponent, ModelImagenComponent],
 })
 export class ComponentsModule {}

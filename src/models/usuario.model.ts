@@ -13,6 +13,7 @@ export class Usuario {
   ) {}
     get imagenURL(){
       //  localhost:3010/api/uploads/usuarios/65087dc5-2012-42d2-aeff-1094bc651e68.png
+      
       if (this.img?.includes('https:')){
         return this.img;
       }else{

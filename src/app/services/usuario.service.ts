@@ -1,13 +1,15 @@
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, NgZone } from '@angular/core';
 import { RegisterForm } from '../interfaces/register-form';
+import Swal from 'sweetalert2';
+
+import { map, Observable, catchError, of } from 'rxjs';
+
 import { environment } from '../../environments/environment';
 import { LoginForm } from '../interfaces/login-form';
-import { map, tap, Observable, catchError, of } from 'rxjs';
-import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
-import { AccountSettingsComponent } from '../pages/account-settings/account-settings.component';
 import { Usuario } from '../../models/usuario.model';
+import { CargarUsuario } from '../interfaces/cargar-usuarios.interface';
 
 declare const google: any;
 declare const gapi: any;
@@ -37,8 +39,8 @@ export class UsuarioService {
       .pipe(
         map((resp: any) => {
           const { email, google, img, nombre, role, uid } = resp.usuario;
-          this.usuario =new Usuario(role,email,google,nombre,'',img,uid) ;
-          
+          this.usuario = new Usuario(role, email, google, nombre, '', img, uid);
+
           localStorage.setItem('token', resp.token);
           return true;
         }),
@@ -58,19 +60,22 @@ export class UsuarioService {
       })
     );
   }
-  get token():string{
+  get token(): string {
     return localStorage.getItem('token') || '';
   }
-  get uid():string{
-    return this.usuario?.uid||'';
+  get uid(): string {
+    return this.usuario?.uid || '';
   }
-  actualizarPerfil(data:{nombre:string,email:string,role:string}) {
-    data={...data,
-      role:this.usuario?.role||''}
-    return this.http.put(`${base_url}/usuarios/${this.uid}`,data,{
-    headers: {
-      'x-token': this.token,}}
-      )
+  get headers() {
+    return {
+      headers: {
+        'x-token': this.token,
+      },
+    };
+  }
+  actualizarPerfil(data: { nombre: string; email: string; role: string }) {
+    data = { ...data, role: this.usuario?.role || '' };
+    return this.http.put(`${base_url}/usuarios/${this.uid}`, data, this.headers);
   }
   loginUsuario(formData: LoginForm) {
     if (formData.remember) {
@@ -140,4 +145,29 @@ export class UsuarioService {
 
     google.accounts.id.disableAutoSelect();
   };
+  cargarUsuarios(desde: number = 0) {
+    const url = `${base_url}/usuarios?desde=${desde}`;
+    return this.http.get<CargarUsuario>(url, this.headers)
+      .pipe(
+        map( resp => {
+          const usuarios  =resp.usuarios.map(
+            user => new Usuario(user.role,user.email,user.google,user.nombre,'',user.img,user.uid)
+            );          
+          return {
+            total:resp.total,
+            usuarios
+          };
+        })
+        );
+  }
+  eliminarUsuario(uid:string){
+    console.log(uid);
+    
+    const url = `${base_url}/usuarios/${uid}`;
+    return this.http.delete(url, this.headers);
+  }
+  guardarUsuario(usuario: Usuario) {
+    // data = { ...data, role: this.usuario?.role || '' };
+    return this.http.put(`${base_url}/usuarios/${usuario.uid}`, usuario, this.headers);
+  }
 }

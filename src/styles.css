@@ -22,5 +22,28 @@
 }
 .img-container
 {
-  
+
+}
+.w100{
+  width: 100px;
+}
+.w140{
+  width: 140px;
+}
+.avatar{
+  width: 50px;
+  border-radius: 100%;
+  /* border: 1px solid grey; */
+}
+.find-modal-imagen{
+  background-color: rgba(0,0,0,0.4);
+  height: 100%;
+  left: 0px;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 9999;
+}
+.oculto {
+  display: none;
 }
