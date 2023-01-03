@@ -4,6 +4,8 @@ import { environment } from '../../environments/environment';
 import { CargarUsuario } from '../interfaces/cargar-usuarios.interface';
 import { map } from 'rxjs';
 import { Usuario } from '../../models/usuario.model';
+import { Hospital } from 'src/models/hospital.model';
+import { Medico } from 'src/models/medico.model';
 
 const base_url = environment.base_url;
 @Injectable({
@@ -25,36 +27,38 @@ export class BusquedasService {
     const usuarios =  busq.map(user => new Usuario(user.role,user.email,user.google,user.nombre,'',user.img,user.uid))
     return usuarios
   }
-  private transformarMedicos(busq: any[]):Usuario[] {
-    const usuarios =  busq.map(user => new Usuario(user.role,user.email,user.google,user.nombre,'',user.img,user.uid))
-    return usuarios
+  private transformarMedicos(busq: any[]):Medico[] {
+    const medicos =  busq.map(medico => new Medico(medico.nombre,medico._id,medico.img))
+    return medicos
   }
-  private transformarHospitales(busq: any[]):Usuario[] {
-    const usuarios =  busq.map(user => new Usuario(user.role,user.email,user.google,user.nombre,'',user.img,user.uid))
-    return usuarios
+  private transformarHospitales(busq: any[]):Hospital[] {
+
+    const hospitales =  busq.map(hospital => new Hospital(hospital.nombre,
+      hospital._id,hospital.img,hospital.usuario))
+    return hospitales
   }
   buscar(tipo: 'usuarios' | 'medicos' | 'hospitales', termino: string = '') {
     const url = `${base_url}/todo/coleccion/${tipo}/${termino}`;
 
     return this.http.get<any[]>(url, this.headers)
     .pipe(
-      map((resp: any) => { 
+      map((resp: any) => {
         // console.log(resp.busq);
-        
+
          switch (tipo) {
           case 'usuarios':
             // console.log(resp.busq);
             // return resp.busq
             return this.transformarUsuarios(resp.busq);
-   
+
           case 'medicos':
             return this.transformarMedicos(resp.busq);
           case 'hospitales':
               return this.transformarHospitales(resp.busq);
-          default: 
+          default:
             return []
         }
-        
+
       // return resp
       })
     );

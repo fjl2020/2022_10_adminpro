@@ -48,7 +48,7 @@ export class ModelImagenComponent implements OnInit {
     const tipo=this.modalImagenSvc.tipo
     if (this.imagenSubir && this.usuario) {
       this.fileUploadSvc
-        .actualizarFoto(this.imagenSubir, 'usuarios', id || '')
+        .actualizarFoto(this.imagenSubir, tipo||'usuarios', id || '')
         .then((img) => {
           this.cerrarModal();
           Swal.fire('Guardado', 'La imagen fue guardada', 'success');

@@ -1,10 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
+import { delay, Subscription } from 'rxjs';
+
 import { UsuarioService } from '../../../services/usuario.service';
 import { ModalImagenService } from 'src/app/services/modal-imagen.service';
 import { BusquedasService } from '../../../services/busquedas.service';
-import Swal from 'sweetalert2';
+
 import { Usuario } from '../../../../models/usuario.model';
-import { delay, Subscription } from 'rxjs';
+import { Hospital } from 'src/models/hospital.model';
 
 @Component({
   selector: 'app-usuarios',
@@ -57,7 +60,7 @@ export class UsuariosComponent implements OnInit,OnDestroy {
     {
 
       this.busquedaSvc.buscar('usuarios',termino)
-      .subscribe(resp=>
+      .subscribe((resp:any[]) =>
         {
 
         this.usuarios=resp
@@ -115,7 +118,7 @@ export class UsuariosComponent implements OnInit,OnDestroy {
 
   }
   abrirModal(usuario:Usuario){
-    console.log(usuario);
+    // console.log(usuario);
     this.modalImageSvc.abrirModal('usuarios',usuario.uid,usuario.img)
 
   }

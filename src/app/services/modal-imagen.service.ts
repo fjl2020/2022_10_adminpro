@@ -32,6 +32,8 @@ export class ModalImagenService {
     }else {
       this.img=`${base_url}/uploads/${tipo}/${img}`
     }
+    console.log('modal service',this.img);
+
   }
   cerrarModal(){
     this._ocultarModal=true;
