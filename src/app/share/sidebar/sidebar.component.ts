@@ -10,17 +10,19 @@ import { UsuarioService } from '../../services/usuario.service';
   ]
 })
 export class SidebarComponent implements OnInit {
-  menuItems:any[]=[]
+  // menuItems:any[]=[]
   public usuario?:Usuario;
-  constructor(private slideSvc:SliderbarService,private _usuarioSvc:UsuarioService) {
-    this.menuItems=this.slideSvc.menu
+  constructor(public slideSvc:SliderbarService,private _usuarioSvc:UsuarioService) {
+    // this.slideSvc.cargarMenu()
+
+    // this.menuItems=this.slideSvc.menu
     this.usuario=_usuarioSvc.usuario
   }
 
   ngOnInit(): void {
-    
-    
-  
+
+
+
   }
 
 }

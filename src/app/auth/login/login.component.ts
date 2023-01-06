@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
       this.loginForm.get('email')?.setValue(this.email)
     }
   }
- 
+
     // ******************* google signin ***********************
   handleError= (response:any)=> {
     console.log("Encoded JWT ID token: " + response.credential);
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
     google.accounts.id.renderButton(
       document.getElementById('buttonDiv'),
       { theme: 'outline', size: 'large' } // customization attributes
-       
+
     );
     google.accounts.id.prompt(); // also display the One Tap dialog
 
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
   // ******************* google signin ***********************
   login() {
 
-   
+
     this.formSubmitted = true;
     if (this.loginForm.invalid) {
       return;
@@ -76,7 +76,6 @@ export class LoginComponent implements OnInit {
       };
       this._usuarioSvc.loginUsuario(loginValues).subscribe(
         (resp) => {
-          // console.log(resp);
           this.ngzone.run(()=>{this.router.navigateByUrl('/dashboard');})
         },
         (err) => {
@@ -97,5 +96,5 @@ export class LoginComponent implements OnInit {
   terminosAceptados() {
     return (formGroup: FormGroup) => {};
   }
-  
+
 }

@@ -41,20 +41,24 @@ export class UsuarioService {
           const { email, google, img, nombre, role, uid } = resp.usuario;
           this.usuario = new Usuario(role, email, google, nombre, '', img, uid);
 
-          localStorage.setItem('token', resp.token);
+          this.guardarLocalStorage(resp.token,resp.menu)
+
           return true;
         }),
         catchError((error) => of(false))
       );
   }
-
+  guardarLocalStorage(token:string,menu:any){
+    localStorage.setItem('token', token);
+    localStorage.setItem('menu', JSON.stringify(menu) );
+  }
   crearUsusario(formData: RegisterForm) {
     return this.http.post(`${base_url}/usuarios`, formData).pipe(
       map((resp: any) => {
         // console.log(resp);
 
         localStorage.setItem('id', resp.id);
-        localStorage.setItem('token', resp.token);
+        this.guardarLocalStorage(resp.token,resp.menu)
         localStorage.setItem('usuario', JSON.stringify(resp.usuario));
         return true;
       })
@@ -65,6 +69,9 @@ export class UsuarioService {
   }
   get uid(): string {
     return this.usuario?.uid || '';
+  }
+  get role():'ADMIN_ROLE'|'USER_ROLE' {
+    return this.usuario?.role || 'USER_ROLE';
   }
   get headers() {
     return {
@@ -91,7 +98,7 @@ export class UsuarioService {
         // console.log(resp);
 
         localStorage.setItem('id', resp.id);
-        localStorage.setItem('token', resp.token);
+        this.guardarLocalStorage(resp.token,resp.menu)
         localStorage.setItem('usuario', JSON.stringify(resp.usuario));
         return true;
       })
@@ -129,7 +136,7 @@ export class UsuarioService {
       .pipe(
         map((resp: any) => {
           localStorage.setItem('id', resp.id);
-          localStorage.setItem('token', resp.token);
+          this.guardarLocalStorage(resp.token,resp.menu)
           localStorage.setItem('usuario', JSON.stringify(resp.usuario));
 
           return true;
@@ -138,6 +145,10 @@ export class UsuarioService {
   }
   logout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('menu');
+    localStorage.removeItem('usuario');
+    localStorage.removeItem('id');
+
 
     this.ngzone.run(() => {
       this.router.navigateByUrl('login');
@@ -152,7 +163,7 @@ export class UsuarioService {
         map( resp => {
           const usuarios  =resp.usuarios.map(
             user => new Usuario(user.role,user.email,user.google,user.nombre,'',user.img,user.uid)
-            );          
+            );
           return {
             total:resp.total,
             usuarios
@@ -162,7 +173,7 @@ export class UsuarioService {
   }
   eliminarUsuario(uid:string){
     console.log(uid);
-    
+
     const url = `${base_url}/usuarios/${uid}`;
     return this.http.delete(url, this.headers);
   }

@@ -13,7 +13,8 @@ export class HeaderComponent implements OnInit {
 
   public usuario?:Usuario;
 
-  constructor(private _usuarioSvc:UsuarioService) {
+  constructor(private _usuarioSvc:UsuarioService,
+    private router:Router) {
     this.usuario=_usuarioSvc.usuario
    }
   ngOnInit(): void {
@@ -21,7 +22,18 @@ export class HeaderComponent implements OnInit {
   }
   logout= ()=>{
     this._usuarioSvc.logout();
-    
+
   };
-  
+  buscar(termino:string){
+
+    if (termino.length===0)
+    {
+      this.router.navigateByUrl( `/dashboard`)
+
+    }else{
+
+      this.router.navigateByUrl( `/dashboard/buscar/${termino}`)
+    }
+
+  }
 }

@@ -3,7 +3,7 @@ import { environment } from 'src/environments/environment';
 const api_url = environment.base_url;
 export class Usuario {
   constructor(
-    public role: string,
+    public role: 'ADMIN_ROLE'|'USER_ROLE',
     public email: string,
     public google?: boolean,
     public nombre?: string,

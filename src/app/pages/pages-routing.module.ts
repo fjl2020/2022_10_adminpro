@@ -13,6 +13,8 @@ import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component'
 import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component';
 import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
 import { MedicoComponent } from './mantenimientos/medicos/medico.component';
+import { BusquedasComponent } from './busquedas/busquedas.component';
+import { AdminGuard } from '../guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -22,18 +24,20 @@ const routes: Routes = [
     children: [
       { path: '', component: DashboardComponent,data:{titulo:'Dashboard'} },
 
-      { path: 'progress', component: ProgressComponent ,data:{titulo:'Progress'}},
-      { path: 'grafica1', component: Grafica1Component ,data:{titulo:'Graph'}},
       { path: 'account-settings', component: AccountSettingsComponent ,data:{titulo:'Account Settings'}},
-      { path: 'promesas', component: PromesasComponent ,data:{titulo:'Promise'}},
+      {path : 'buscar/:termino',component:BusquedasComponent , data: {titulo: 'Busquedas'}},
+      { path: 'grafica1', component: Grafica1Component ,data:{titulo:'Graph'}},
       { path: 'perfil', component: PerfilComponent ,data:{titulo:'perfil'}},
+      { path: 'progress', component: ProgressComponent ,data:{titulo:'Progress'}},
+      { path: 'promesas', component: PromesasComponent ,data:{titulo:'Promise'}},
       { path: 'rxjs', component: RxjsComponent  ,data:{titulo:'RxJs'}},
+
       //mantenimientos
-      { path: 'usuarios', component: UsuariosComponent  ,data:{titulo:'Usuarios de aplicación'}},
       { path: 'hospitales', component: HospitalesComponent  ,data:{titulo:'Hospitales de aplicación'}},
       { path: 'medicos', component: MedicosComponent  ,data:{titulo:'Medicos de aplicación'}},
       { path: 'medico/:id', component: MedicoComponent  ,data:{titulo:'Medicos de aplicación'}},
-
+      //rutas de admin
+      { path: 'usuarios', canActivate: [AdminGuard],component: UsuariosComponent  ,data:{titulo:'Usuarios de aplicación'}},
     ],
   },
 ];

@@ -73,11 +73,12 @@
             href="javascript:void(0)"
             ><i class="ti-search"></i
           ></a>
-          <form class="app-search">
+          <form class="app-search" (submit)="buscar(termino.value)">
             <input
               type="text"
               class="form-control"
-              placeholder="Search & enter"
+              placeholder="texto a buscar"
+              #termino
             />
             <a class="srh-btn"><i class="ti-close"></i></a>
           </form>

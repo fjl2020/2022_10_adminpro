@@ -21,6 +21,7 @@ import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
 import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { MedicoComponent } from './mantenimientos/medicos/medico.component';
+import { BusquedasComponent } from './busquedas/busquedas.component';
 
 
 
@@ -38,6 +39,7 @@ import { MedicoComponent } from './mantenimientos/medicos/medico.component';
     MedicosComponent,
     HospitalesComponent,
     MedicoComponent,
+    BusquedasComponent,
 
 
   ],
@@ -62,6 +64,7 @@ import { MedicoComponent } from './mantenimientos/medicos/medico.component';
     PromesasComponent,
     RxjsComponent,
     MedicoComponent,
+    BusquedasComponent,
   ]
 })
 export class PagesModule { }
